@@ -1,4 +1,5 @@
 {
+  "telegramToken": "6406866713:AAFVnGM6qzVphKFn6TDtfsko0EE0PL5asFE",
   "dbConfig": {
     "HOST": "localhost",
     "USER": "postgres",

@@ -1,4 +1,4 @@
-const userService = require("../service/user");
+const sessionService = require("../service/session");
 
 const resolve = (data, res) => {
   return res.status(200).send({
@@ -16,13 +16,14 @@ const reject = (err, res) => {
 };
 
 exports.create = (req, res) => {
-  userService
+  console.log(req.body);
+  sessionService
     .create(req.body)
     .then((data) => resolve(data, res))
     .catch((err) => reject(err, res));
 };
 exports.remove = (req, res) => {
-  userService
+  sessionService
     .remove(req.body.id)
     .then((data) => resolve(data, res))
     .catch((err) => reject(err, res));

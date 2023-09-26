@@ -7,17 +7,21 @@ const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Matches "/echo [whatever]"
 bot.onText(/\/echo (.+)/, (msg, match) => {
-  userService.create({ chatId: msg.chat.id, username: msg.chat.username });
+  userService.create({ channel: msg.chat.id, username: msg.chat.username });
 
-  bot.sendMessage(chatId, "Welcome to us!!!");
+  bot.sendMessage(msg.chat.id, "Welcome to us!!!");
 });
 
 // Listen for any kind of message. There are different kinds of
 // messages.
 bot.on("message", (msg) => {
-  userService.create({ chatId: msg.chat.id, username: msg.chat.username });
+  console.log(msg.chat.id);
+  userService.create({
+    channel: msg.chat.id,
+    name: msg.chat.username,
+  });
 
-  bot.sendMessage(chatId, "Welcome to us!!!");
+  bot.sendMessage(msg.chat.id, "Welcome to us!!!");
 });
 
 module.exports = bot;

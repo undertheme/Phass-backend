@@ -23,7 +23,7 @@ exports.create = (req, res) => {
 };
 exports.remove = (req, res) => {
   userService
-    .remove(req.body.id)
+    .delete(req.body.id)
     .then((data) => resolve(data, res))
     .catch((err) => reject(err, res));
 };

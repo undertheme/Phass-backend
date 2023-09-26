@@ -36,10 +36,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: true,
     },
-    createTime: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
   });
 
   return Session;

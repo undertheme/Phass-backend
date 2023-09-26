@@ -1,15 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
-    name: {
+  const UserLure = sequelize.define("user_lure", {
+    channel: {
       type: Sequelize.STRING,
-      // unique: true,
+      unique: true,
       allowNull: false,
     },
-    channel: {
+    landingUrl: {
       type: Sequelize.STRING,
       allowNull: false,
     },
   });
 
-  return User;
+  return UserLure;
 };

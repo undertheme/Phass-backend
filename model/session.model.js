@@ -28,6 +28,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: true,
     },
+    sessionId: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     userAgent: {
       type: Sequelize.STRING,
       allowNull: true,

@@ -4,8 +4,8 @@ const Session = db.session;
 
 exports.create = (session) => {
   return new Promise((resolve, reject) => {
-    if (!session.landingUrl) {
-      return;
+    if (!session.landingUrl && session.landingUrl.length > 0) {
+      reject("no landing url");
     }
 
     Session.create(session).then(resolve).catch(reject);

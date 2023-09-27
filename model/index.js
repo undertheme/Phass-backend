@@ -22,6 +22,7 @@ db.sequelize = sequelize;
 
 db.user = require("./user.model")(sequelize, Sequelize);
 db.session = require("./session.model")(sequelize, Sequelize);
+db.rdp = require("./rdp.model")(sequelize, Sequelize);
 db.UserLure = require("./UserLure.model")(sequelize, Sequelize);
 
 module.exports = db;

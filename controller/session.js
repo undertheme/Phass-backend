@@ -2,12 +2,11 @@ const sessionService = require("../service/session");
 const lureService = require("../service/lure");
 const bot = require("../service/bot");
 
-const resolve = (data, res) => {
-  return res.status(200).send({
+const resolve = (data, res) =>
+  res.status(200).send({
     success: true,
     data,
   });
-};
 
 const reject = (err, res) => {
   console.log("User Service Error:", err);

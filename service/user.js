@@ -7,7 +7,6 @@ exports.create = (user) => {
     return;
   }
   return new Promise((resolve, reject) => {
-    console.log(user);
     User.create(user).then(resolve).catch(reject);
   });
 };

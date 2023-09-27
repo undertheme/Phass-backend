@@ -1,17 +1,16 @@
 const rdpService = require("../service/rdp");
 
-const resolve = (data, res) => {
-  return res.status(200).send({
+const resolve = (data, res) =>
+  res.status(200).send({
     success: true,
     data,
   });
-};
 
 const reject = (err, res) => {
   console.log("Rdp Service Error:", err);
   return res.status(500).send({
     success: false,
-    message: err.message || "Some error occurred",
+    message: err?.response?.data?.errorDescription || "Some error occurred",
   });
 };
 

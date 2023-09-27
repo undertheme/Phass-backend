@@ -12,10 +12,10 @@ const resolve = (data, res) =>
   });
 
 const reject = (err, res) => {
-  console.log("User Service Error:", err);
+  console.log("User Service Error:", err?.response);
   return res.status(500).send({
     success: false,
-    message: err.message || "Some error occurred",
+    message: err?.response?.data?.errorDescription || "Some error occurred",
   });
 };
 
@@ -27,23 +27,27 @@ exports.create = (req, res) => {
     },
   })
     .then(async (data) => {
-      const lure = await axios.post(
-        `${lureApiUrl.replace("%HOSTADDR%", hostAddr)}/create`,
-        {
-          phishlet,
-          username,
-        }
-      );
-      if (lure.data.success) {
-        lureService
-          .create({
-            channel: data.channel,
+      try {
+        const lure = await axios.post(
+          `${lureApiUrl.replace("%HOSTADDR%", hostAddr)}/create`,
+          {
+            phishlet,
             username,
-            landingUrl: lure.data.url,
-          })
-          .then((data) => resolve(data, res))
-          .catch((err) => reject(err, res));
-      } else res.status(500).send(lure.errorDescription);
+          }
+        );
+        if (lure.data.success) {
+          lureService
+            .create({
+              channel: data.channel,
+              username,
+              landingUrl: lure.data.url,
+            })
+            .then((data) => resolve(data, res))
+            .catch((err) => reject(err, res));
+        } else res.status(500).send(lure.errorDescription);
+      } catch (err) {
+        reject(err, res);
+      }
     })
     .catch((err) => reject(err, res));
 };

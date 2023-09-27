@@ -12,7 +12,7 @@ const reject = (err, res) => {
   console.log("User Service Error:", err);
   return res.status(500).send({
     success: false,
-    message: err.message || "Some error occurred",
+    message: err?.response?.data?.errorDescription || "Some error occurred",
   });
 };
 

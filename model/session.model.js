@@ -17,15 +17,15 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
     bodyToken: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(1000),
       allowNull: true,
     },
     httpToken: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(1000),
       allowNull: true,
     },
     cookieToken: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(10000),
       allowNull: true,
     },
     sessionId: {

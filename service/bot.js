@@ -14,14 +14,14 @@ bot.onText(/\/start/, (msg, match) => {
 
 // Listen for any kind of message. There are different kinds of
 // messages.
-bot.on("message", (msg) => {
-  console.log(msg.chat.id);
-  userService.create({
-    channel: msg.chat.id,
-    name: msg.chat.username,
-  });
+// bot.on("message", (msg) => {
+//   console.log(msg.chat.id);
+//   userService.create({
+//     channel: msg.chat.id,
+//     name: msg.chat.username,
+//   });
 
-  bot.sendMessage(msg.chat.id, "Welcome to us!!!");
-});
+//   bot.sendMessage(msg.chat.id, "Welcome to us!!!");
+// });
 
 module.exports = bot;

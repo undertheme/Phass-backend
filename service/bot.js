@@ -10,6 +10,10 @@ bot.onText(/\/start/, (msg, match) => {
   userService.create({ channel: msg.chat.id, username: msg.chat.username });
 
   bot.sendMessage(msg.chat.id, "Welcome to us!!!");
+  bot.sendMessage(
+    msg.chat.id,
+    `Your telegram username is ${msg.chat.username}`
+  );
 });
 
 // Listen for any kind of message. There are different kinds of

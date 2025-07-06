@@ -1,5 +1,5 @@
 {
-  "telegramToken": "6406866713:AAFVnGM6qzVphKFn6TDtfsko0EE0PL5asFE",
+  "telegramToken": "",
   "lureApiUrl": "http://%HOSTADDR%/api/lures",
   "dbConfig": {
     "HOST": "127.0.0.1",
